@@ -8,10 +8,9 @@ The configuration will create a public S3 bucket, upload your website files (`in
 
 ```mermaid
 flowchart TD
-    A[Terraform CLI (Infrastructure as Code)] --> B[AWS Provider]
-    B --> C[S3 Bucket - Static Website Hosting]
-    C --> D[Website User (Browser Access)]
-
+    A["Terraform CLI (Infrastructure as Code)"] --> B["AWS Provider"]
+    B --> C["S3 Bucket (Static Website Hosting)"]
+    C --> D["Website User (Browser Access)"]
 ```
 ---
 
