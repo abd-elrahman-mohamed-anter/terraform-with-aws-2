@@ -21,7 +21,6 @@ resource "aws_s3_bucket" "bucket" {
   }
 }
 
-# Ownership Controls
 resource "aws_s3_bucket_ownership_controls" "bucket" {
   bucket = aws_s3_bucket.bucket.id
   rule {
@@ -29,7 +28,6 @@ resource "aws_s3_bucket_ownership_controls" "bucket" {
   }
 }
 
-# Public Access Block (Private)
 resource "aws_s3_bucket_public_access_block" "bucket" {
   bucket = aws_s3_bucket.bucket.id
   block_public_acls       = true
@@ -38,7 +36,9 @@ resource "aws_s3_bucket_public_access_block" "bucket" {
   restrict_public_buckets = true
 }
 
+# ----------------------------
 # Upload website files
+# ----------------------------
 locals {
   website_files = fileset("${path.module}/website", "**/*")
 }
@@ -77,7 +77,7 @@ resource "aws_cloudfront_origin_access_control" "default" {
 }
 
 # ----------------------------
-# CloudFront Distribution (Simple Default)
+# CloudFront Distribution
 # ----------------------------
 resource "aws_cloudfront_distribution" "cdn" {
   origin {
@@ -104,16 +104,31 @@ resource "aws_cloudfront_distribution" "cdn" {
     }
   }
 
-  price_class = "PriceClass_100"
-
-  viewer_certificate {
-    cloudfront_default_certificate = true
+  # Error Pages
+  custom_error_response {
+    error_code          = 404
+    response_page_path  = "/error.html"
+    response_code       = 404
+    error_caching_min_ttl = 0
   }
+
+  custom_error_response {
+    error_code          = 403
+    response_page_path  = "/error.html"
+    response_code       = 403
+    error_caching_min_ttl = 0
+  }
+
+  price_class = "PriceClass_100"
 
   restrictions {
     geo_restriction {
       restriction_type = "none"
     }
+  }
+
+  viewer_certificate {
+    cloudfront_default_certificate = true
   }
 }
 
