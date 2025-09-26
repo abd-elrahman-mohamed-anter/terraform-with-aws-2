@@ -5,29 +5,15 @@ The configuration will create a public S3 bucket, upload your website files (`in
 
 ---
 🏗️ Architecture
-        +-------------------+
-        |   Terraform CLI   |
-        | (Infrastructure   |
-        |   as Code)        |
-        +---------+---------+
-                  |
-                  v
-        +-------------------+
-        |   AWS Provider    |
-        +---------+---------+
-                  |
-                  v
-        +-------------------+
-        |   S3 Bucket       |
-        |  (Static Website) |
-        +---------+---------+
-                  |
-                  v
-        +-------------------+
-        |   Website User    |
-        | (Browser Access)  |
-        +-------------------+
+   ## 🏗️ Architecture
 
+```mermaid
+flowchart TD
+    A[Terraform CLI<br>(Infrastructure as Code)] --> B[AWS Provider]
+    B --> C[S3 Bucket<br>(Static Website Hosting)]
+    C --> D[Website User<br>(Browser Access)]
+
+```
 ---
 
 ## 📌 Features
