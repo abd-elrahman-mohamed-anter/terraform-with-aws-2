@@ -4,14 +4,13 @@ This project demonstrates how to deploy a **static website** on **Amazon S3** us
 The configuration will create a public S3 bucket, upload your website files (`index.html` and `error.html`), and expose the website via an endpoint.
 
 ---
-🏗️ Architecture
-   ## 🏗️ Architecture
+## 🏗️ Architecture
 
 ```mermaid
 flowchart TD
-    A[Terraform CLI<br>(Infrastructure as Code)] --> B[AWS Provider]
-    B --> C[S3 Bucket<br>(Static Website Hosting)]
-    C --> D[Website User<br>(Browser Access)]
+    A[Terraform CLI (Infrastructure as Code)] --> B[AWS Provider]
+    B --> C[S3 Bucket - Static Website Hosting]
+    C --> D[Website User (Browser Access)]
 
 ```
 ---
